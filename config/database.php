@@ -26,7 +26,11 @@ return [
     |
     */
 
+<<<<<<< HEAD
     'default' => env('DB_CONNECTION', 'mysql'),
+=======
+    'default' => env('DB_CONNECTION', 'pgsql'),
+>>>>>>> 04d41c5d65d827a3a897346e4a244eb72df8cda2
 
     /*
     |--------------------------------------------------------------------------

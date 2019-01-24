@@ -12,7 +12,11 @@ return [
     | any other location as required by the application or its packages.
     */
 
+<<<<<<< HEAD
     'name' => 'My Application',
+=======
+    'name' => 'Softball BC',
+>>>>>>> 04d41c5d65d827a3a897346e4a244eb72df8cda2
 
     /*
     |--------------------------------------------------------------------------
