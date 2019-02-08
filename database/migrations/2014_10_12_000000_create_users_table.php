@@ -14,12 +14,6 @@ class CreateUsersTable extends Migration
     public function up()
     {
         Schema::create('users', function (Blueprint $table) {
-<<<<<<< HEAD
-            $table->increments('id');
-            $table->string('name');
-            $table->string('email')->unique();
-            $table->string('password');
-=======
 
             $table->increments('id');
             $table->string('email')->unique();
@@ -35,7 +29,6 @@ class CreateUsersTable extends Migration
             $table->string('zip_code');
             $table->string('country');
 
->>>>>>> 04d41c5d65d827a3a897346e4a244eb72df8cda2
             $table->rememberToken();
             $table->timestamps();
         });
@@ -48,10 +41,6 @@ class CreateUsersTable extends Migration
      */
     public function down()
     {
-<<<<<<< HEAD
         Schema::drop('users');
-=======
-        Schema::drop(');users');
->>>>>>> 04d41c5d65d827a3a897346e4a244eb72df8cda2
     }
 }
