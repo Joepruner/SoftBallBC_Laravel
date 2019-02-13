@@ -25,13 +25,13 @@
 
 @section('content')
 <div class="flex-center full-height">
-            <div class="content ">
-                <div class="title m-b-md">
-                    <p class="zoomInUp animated">Softball BC</p>
-                </div>
-                <h3>
-                    The official home of the British Columbia Amateur Softball Association
-                </h3>
-            </div>
+    <div class="content ">
+        <div class="title m-b-md">
+            <p class="zoomInUp animated">Softball BC</p>
         </div>
+        <h3>
+            The official home of the British Columbia Amateur Softball Association
+        </h3>
+    </div>
+</div>
 @endsection
