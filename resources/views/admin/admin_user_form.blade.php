@@ -1,11 +1,11 @@
 <div class='form-group'>
-        {!! Form::label('email', 'Email:') !!}
-        {!! Form::text('email', null, ['class' => 'form-control']) !!}
+        {!! Form::label('admin_level', 'Admin level:') !!}
+        {!! Form::select('admin_level', array('Edit team only' => 'ETO', 'Edit users' => 'EU'),'ETO', ['class' => 'form-control']) !!}
 </div>
 
 <div class='form-group'>
-        {!! Form::label('password', 'Password:') !!}
-        {!! Form::text('password', null, ['class' => 'form-control']) !!}
+        {!! Form::label('email', 'Email:') !!}
+        {!! Form::text('email', null, ['class' => 'form-control']) !!}
 </div>
 
 <div class='form-group'>
@@ -20,7 +20,7 @@
 
 <div class='form-group'>
         {!! Form::label('birth_date', 'Birth date:') !!}
-        {!! Form::text('birth_date', null, ['class' => 'form-control']) !!}
+        {!! Form::date('birth_date', null, ['class' => 'form-control']) !!}
 </div>
 
 <div class='form-group'>

@@ -68,7 +68,7 @@
                                     <li>
                                         <a href="{{ url('/account') }}"
                                             onclick="event.preventDefault();
-                                                     document.getElementById('user-account').submit();">
+                                            document.getElementById('user-account').submit();">
                                             Account
                                         </a>
 
@@ -79,7 +79,7 @@
                                     <li>
                                             <a href="{{ url('/logout') }}"
                                                 onclick="event.preventDefault();
-                                                         document.getElementById('logout-form').submit();">
+                                                document.getElementById('logout-form').submit();">
                                                 Logout
                                             </a>
 

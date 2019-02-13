@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Request;
 // use Illuminate\Foundation\Auth\User;
 use App\User;
+use Auth;
 
 class UserController extends Controller
 {
@@ -15,9 +16,24 @@ class UserController extends Controller
      */
     public function index()
     {
-        $users = User::all();
+        // $users = User::all();
 
-        return view('users.index', compact('users'));
+        // return view('users.ETO_index', compact('users'));
+
+        // print(Auth::user()->admin_level);
+
+        if(Auth::user()->admin_level == 'EU'){
+
+        return view('admin.EU_index');
+        }
+        elseif (Auth::user()->admin_level == 'ETO') {
+
+        $users = Auth::user();
+        return view('users.ETO_index', compact('users'));
+        }
+        else{
+            print('Error in user controller index');
+        }
     }
 
     /**
@@ -50,9 +66,8 @@ class UserController extends Controller
      */
     public function show($id)
     {
-        $user = User::findOrFail($id);
-
-        return view('users.show', compact('user'));
+        $users = User::all();
+        return view('admin.admin_view_users', compact('users'));
     }
 
     /**
@@ -65,7 +80,19 @@ class UserController extends Controller
     {
         $user = User::findOrFail($id);
 
-        return view('users.edit', compact('user'));
+        // return view('users.edit', compact('user'));
+
+        // if(Auth::user()->admin_level == 'EU'){
+        //     // $users = User::all();
+        //     return view('admin.admin_user_edit', compact('user'));
+        // }
+        // elseif (Auth::user()->admin_level == 'ETO') {
+        //     $users = Auth::user();
+            return view('users.user_self_edit', compact('user'));
+        // }
+        // else{
+        //     print('Error in user controller index');
+        // }
     }
 
     /**
@@ -82,6 +109,7 @@ class UserController extends Controller
         $user->update($input);
 
         return redirect('users');
+
     }
 
     /**

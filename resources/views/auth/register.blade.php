@@ -10,6 +10,22 @@
                     <form class="form-horizontal" role="form" method="POST" action="{{ url('/register') }}">
                         {{ csrf_field() }}
 
+                        <div class="form-group{{ $errors->has('admin_level') ? ' has-error' : '' }}">
+                                <label for="admin_level" class="col-md-4 control-label">Admin level</label>
+
+                                <div class="col-md-6">
+                                    <select id="admin_level" class="form-control" name="admin_level" required autofocus>
+                                        <option value="EU">Admin edit users and all</option>
+                                        <option value="ETO" selected>Edit team and self only</option>
+                                    </select>
+                                @if ($errors->has('admin_level'))
+                                    <span class="help-block">
+                                        <strong>{{ $errors->first('admin_level') }}</strong>
+                                    </span>
+                                @endif
+                            </div>
+                        </div>
+
                         <div class="form-group{{ $errors->has('first_name') ? ' has-error' : '' }}">
                             <label for="first_name" class="col-md-4 control-label">First name</label>
 
@@ -42,7 +58,7 @@
                             <label for="birth_date" class="col-md-4 control-label">Birth date</label>
 
                             <div class="col-md-6">
-                                <input id="birth_date" type="text" class="form-control" name="birth_date" value="{{ old('birth_date') }}" required autofocus>
+                                <input id="birth_date" type="date" class="form-control" name="birth_date" value="{{ old('birth_date') }}" required autofocus>
 
                                 @if ($errors->has('birth_date'))
                                     <span class="help-block">
