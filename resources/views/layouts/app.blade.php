@@ -9,22 +9,28 @@
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
     <title>{{ config('app.name', 'Laravel') }}</title>
-
+    @yield('style')
     <!-- Styles -->
     <link href="/css/app.css" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.7.0/animate.min.css">
-    <style>
-            @yield('style')
-    </style>
 
-</head>
+    <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/v/ju-1.12.1/jszip-2.5.0/dt-1.10.18/af-2.3.2/b-1.5.4/b-colvis-1.5.4/b-html5-1.5.4/fh-3.1.4/kt-2.5.0/r-2.2.2/sc-1.5.0/sl-1.2.6/datatables.min.css"/>
 
-    <!-- Scripts -->
-    <script>
+
+
+    <script src="/js/app.js"></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.36/pdfmake.min.js"></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.36/vfs_fonts.js"></script>
+    <script type="text/javascript" src="https://cdn.datatables.net/v/ju-1.12.1/jszip-2.5.0/dt-1.10.18/af-2.3.2/b-1.5.4/b-colvis-1.5.4/b-html5-1.5.4/fh-3.1.4/kt-2.5.0/r-2.2.2/sc-1.5.0/sl-1.2.6/datatables.min.js"></script>
+    @yield('scripts')
+    <!-- <script>
         window.Laravel = <?php echo json_encode([
             'csrfToken' => csrf_token(),
         ]); ?>
-    </script>
+    </script> -->
+</head>
+
 </head>
 <body>
     <div id="app">
@@ -77,16 +83,16 @@
                                         </form>
                                     </li>
                                     <li>
-                                            <a href="{{ url('/logout') }}"
-                                                onclick="event.preventDefault();
-                                                document.getElementById('logout-form').submit();">
-                                                Logout
-                                            </a>
+                                        <a href="{{ url('/logout') }}"
+                                            onclick="event.preventDefault();
+                                            document.getElementById('logout-form').submit();">
+                                            Logout
+                                        </a>
 
-                                            <form id="logout-form" action="{{ url('/logout') }}" method="POST" style="display: none;">
-                                                {{ csrf_field() }}
-                                            </form>
-                                        </li>
+                                        <form id="logout-form" action="{{ url('/logout') }}" method="POST" style="display: none;">
+                                            {{ csrf_field() }}
+                                        </form>
+                                    </li>
                                 </ul>
                             </li>
                         @endif
@@ -99,6 +105,7 @@
     </div>
 
     <!-- Scripts -->
-    <script src="/js/app.js"></script>
+
+
 </body>
 </html>

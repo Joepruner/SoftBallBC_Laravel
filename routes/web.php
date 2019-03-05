@@ -19,4 +19,10 @@ Auth::routes();
 Route::get('/home', 'HomeController@index');
 
 Route::resource('users', 'UserController');
+
+Route::resource('people', 'PersonController');
+
+Route::resource('teams','TeamController');
+
+Route::resource('active_people','ActivePersonController');
 // Route::post('account', 'UserController@store')->name('account.store');

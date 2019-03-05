@@ -16,6 +16,16 @@
     "vue-resource": "^0.9.3"
   },
   "dependencies": {
-    "jshint": "^2.10.1"
+    "datatables.net-autofill-jqui": "^2.3.2",
+    "datatables.net-buttons-jqui": "^1.5.4",
+    "datatables.net-fixedheader-jqui": "^3.1.5",
+    "datatables.net-jqui": "^1.10.19",
+    "datatables.net-keytable-jqui": "^2.5.0",
+    "datatables.net-responsive-jqui": "^2.2.3",
+    "datatables.net-scroller-jqui": "^1.5.1",
+    "datatables.net-select-jqui": "^1.2.7",
+    "jshint": "^2.10.1",
+    "jszip": "^3.2.0",
+    "pdfmake": "^0.1.53"
   }
 }

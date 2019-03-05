@@ -2,12 +2,9 @@
 
 namespace App\Http\Controllers;
 
-use Request;
-// use Illuminate\Foundation\Auth\User;
-use App\User;
-use Auth;
+use Illuminate\Http\Request;
 
-class UserController extends Controller
+class PersonController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -16,7 +13,7 @@ class UserController extends Controller
      */
     public function index()
     {
-        return view('users.index', compact('users'));
+        //
     }
 
     /**
@@ -26,7 +23,7 @@ class UserController extends Controller
      */
     public function create()
     {
-        return view('users.create');
+        //
     }
 
     /**
@@ -37,8 +34,7 @@ class UserController extends Controller
      */
     public function store(Request $request)
     {
-        $input = Request::all();
-        User::create($input);
+        //
     }
 
     /**
@@ -49,8 +45,7 @@ class UserController extends Controller
      */
     public function show($id)
     {
-        $users = User::all();
-        return view('admin.admin_view_users', compact('users'));
+        //
     }
 
     /**
@@ -61,9 +56,7 @@ class UserController extends Controller
      */
     public function edit($id)
     {
-        $user = User::findOrFail($id);
-
-            return view('users.user_self_edit', compact('user'));
+        //
     }
 
     /**
@@ -75,12 +68,7 @@ class UserController extends Controller
      */
     public function update(Request $request, $id)
     {
-        $user = User::findOrFail($id);
-        $input = Request::all();
-        $user->update($input);
-
-        return redirect('users');
-
+        //
     }
 
     /**
@@ -91,9 +79,6 @@ class UserController extends Controller
      */
     public function destroy($id)
     {
-        $user = User::findOrFail($id);
-        $user->delete();
-
-        return redirect('users.index');
+        //
     }
 }
