@@ -4,15 +4,28 @@ namespace Illuminate\Mail;
 
 use Swift_Image;
 use Swift_Attachment;
+use Illuminate\Support\Traits\ForwardsCalls;
 
+/**
+ * @mixin \Swift_Message
+ */
 class Message
 {
+    use ForwardsCalls;
+
     /**
      * The Swift Message instance.
      *
      * @var \Swift_Message
      */
     protected $swift;
+
+    /**
+     * CIDs of files embedded in the message.
+     *
+     * @var array
+     */
+    protected $embeddedFiles = [];
 
     /**
      * Create a new message instance.
@@ -198,7 +211,7 @@ class Message
      * Create a Swift Attachment instance.
      *
      * @param  string  $file
-     * @return \Swift_Attachment
+     * @return \Swift_Mime_Attachment
      */
     protected function createAttachmentFromPath($file)
     {
@@ -229,7 +242,7 @@ class Message
      */
     protected function createAttachmentFromData($data, $name)
     {
-        return Swift_Attachment::newInstance($data, $name);
+        return new Swift_Attachment($data, $name);
     }
 
     /**
@@ -240,7 +253,13 @@ class Message
      */
     public function embed($file)
     {
-        return $this->swift->embed(Swift_Image::fromPath($file));
+        if (isset($this->embeddedFiles[$file])) {
+            return $this->embeddedFiles[$file];
+        }
+
+        return $this->embeddedFiles[$file] = $this->swift->embed(
+            Swift_Image::fromPath($file)
+        );
     }
 
     /**
@@ -253,7 +272,7 @@ class Message
      */
     public function embedData($data, $name, $contentType = null)
     {
-        $image = Swift_Image::newInstance($data, $name, $contentType);
+        $image = new Swift_Image($data, $name, $contentType);
 
         return $this->swift->embed($image);
     }
@@ -305,8 +324,6 @@ class Message
      */
     public function __call($method, $parameters)
     {
-        $callable = [$this->swift, $method];
-
-        return call_user_func_array($callable, $parameters);
+        return $this->forwardCallTo($this->swift, $method, $parameters);
     }
 }

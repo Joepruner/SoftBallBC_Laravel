@@ -44,7 +44,7 @@ trait InteractsWithQueue
     public function fail($exception = null)
     {
         if ($this->job) {
-            return $this->job->failed($exception ?: new ManuallyFailedException);
+            $this->job->fail($exception);
         }
     }
 

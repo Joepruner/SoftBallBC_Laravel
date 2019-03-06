@@ -1,26 +1,30 @@
 @extends('layouts.app')
 @section('style')
-.content {
-    text-align: center;
-}
 
-.title {
-    font-size: 84px;
-    color:cornflowerblue;
-}
-.full-height {
-    height: 70vh;
-}
+<!-- Styles -->
+<style>
+    .content {
+        text-align: center;
+    }
 
-.flex-center {
-    align-items: center;
-    display: flex;
-    justify-content: center;
-}
+    .title {
+        font-size: 84px;
+        color:cornflowerblue;
+    }
+    .full-height {
+        height: 70vh;
+    }
 
-.m-b-md {
-    margin-bottom: 30px;
-}
+    .flex-center {
+        align-items: center;
+        display: flex;
+        justify-content: center;
+    }
+
+    .m-b-md {
+        margin-bottom: 30px;
+    }
+</style>
 @endsection
 
 @section('content')

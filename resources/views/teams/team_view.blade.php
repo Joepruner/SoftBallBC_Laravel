@@ -12,12 +12,12 @@
         <table id="teams_table" class="display">
             <thead>
                 <tr>
-                    <th>Edit</th>
+                    <!-- <th>Edit</th> -->
                     <th>Name</th>
                     <!-- <th>Season</th> -->
                 </tr>
             </thead>
-            <tbody>
+            <!-- <tbody>
                 @forelse ($teams as $team)
 
                 <tr>
@@ -27,16 +27,16 @@
                         </a>
                     </td>
                     <td>{{ $team->name }}</td>
-                    <!-- <td>{{ $team->season }}</td> -->
+                    <td>{{ $team->season }}</td>
                 </tr>
 
                 @empty
                 <p>There are no teams to display!</p>
                 @endforelse
-            </tbody>
+            </tbody> -->
         </table>
     </div>
-    <div class="col-md-6 col">
+    <!-- <div class="col-md-6 col">
         <table id="active_people_table" class="display">
             <thead>
                 <tr>
@@ -46,8 +46,8 @@
                     <th>Last name</th>
                     <th>Type</th>
                 </tr>
-            </thead>
-            <tbody>
+            </thead> -->
+            <!-- <tbody>
             @forelse ($active_people as $active_person)
 
                 <tr>
@@ -65,31 +65,32 @@
             @empty
             <p>There are no teams to display!</p>
             @endforelse
-        </tbody>
+        </tbody> -->
         </table>
 
     </div>
 </div>
 <!-- </div> -->
-@section('scripts')
+@stop
+
+@push('scripts')
 <script>
-    $(document).ready(function () {
+$(function () {
     $('#teams_table').DataTable({
-            select: {
-                style: 'single',
-                selector: 'tr',
-            },
+            serverSide: true,
+            processing: true,
+            ajax: '/eloquent/array-data'
         });
     });
 
-    $(document).ready(function () {
-        $('#active_people_table').DataTable({
-            select: {
-                style: 'single',
-                selector: 'tr',
-            },
-        });
-    });
+
 </script>
-@stop
-@stop
+@endpush
+<!-- $(document).ready(function () {
+    $('#active_people_table').DataTable({
+        select: {
+            style: 'single',
+            selector: 'tr',
+        },
+    });
+}); -->

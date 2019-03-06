@@ -2,17 +2,17 @@
 
 namespace Illuminate\Notifications\Messages;
 
+use Traversable;
+use Illuminate\Contracts\Support\Arrayable;
+
 class MailMessage extends SimpleMessage
 {
     /**
-     * The view for the message.
+     * The view to be rendered.
      *
-     * @var string
+     * @var array|string
      */
-    public $view = [
-        'notifications::email',
-        'notifications::email-plain',
-    ];
+    public $view;
 
     /**
      * The view data for the message.
@@ -22,6 +22,13 @@ class MailMessage extends SimpleMessage
     public $viewData = [];
 
     /**
+     * The Markdown template to render (if applicable).
+     *
+     * @var string|null
+     */
+    public $markdown = 'notifications::email';
+
+    /**
      * The "from" information for the message.
      *
      * @var array
@@ -29,25 +36,25 @@ class MailMessage extends SimpleMessage
     public $from = [];
 
     /**
-     * The recipient information for the message.
+     * The "reply to" information for the message.
      *
      * @var array
      */
-    public $to = [];
+    public $replyTo = [];
 
     /**
-     * The "cc" recipients of the message.
+     * The "cc" information for the message.
      *
      * @var array
      */
     public $cc = [];
 
     /**
-     * The "reply to" information for the message.
+     * The "bcc" information for the message.
      *
      * @var array
      */
-    public $replyTo = [];
+    public $bcc = [];
 
     /**
      * The attachments for the message.
@@ -73,7 +80,7 @@ class MailMessage extends SimpleMessage
     /**
      * Set the view for the mail message.
      *
-     * @param  string  $view
+     * @param  array|string  $view
      * @param  array  $data
      * @return $this
      */
@@ -81,6 +88,38 @@ class MailMessage extends SimpleMessage
     {
         $this->view = $view;
         $this->viewData = $data;
+
+        $this->markdown = null;
+
+        return $this;
+    }
+
+    /**
+     * Set the Markdown template for the notification.
+     *
+     * @param  string  $view
+     * @param  array  $data
+     * @return $this
+     */
+    public function markdown($view, array $data = [])
+    {
+        $this->markdown = $view;
+        $this->viewData = $data;
+
+        $this->view = null;
+
+        return $this;
+    }
+
+    /**
+     * Set the default markdown template.
+     *
+     * @param  string  $template
+     * @return $this
+     */
+    public function template($template)
+    {
+        $this->markdown = $template;
 
         return $this;
     }
@@ -100,41 +139,55 @@ class MailMessage extends SimpleMessage
     }
 
     /**
-     * Set the recipient address for the mail message.
-     *
-     * @param  string|array  $address
-     * @return $this
-     */
-    public function to($address)
-    {
-        $this->to = $address;
-
-        return $this;
-    }
-
-    /**
-     * Set the recipients of the message.
-     *
-     * @param  string|array  $address
-     * @return $this
-     */
-    public function cc($address)
-    {
-        $this->cc = $address;
-
-        return $this;
-    }
-
-    /**
      * Set the "reply to" address of the message.
      *
-     * @param  array|string $address
-     * @param null $name
+     * @param  array|string  $address
+     * @param  string|null  $name
      * @return $this
      */
     public function replyTo($address, $name = null)
     {
-        $this->replyTo = [$address, $name];
+        if ($this->arrayOfAddresses($address)) {
+            $this->replyTo += $this->parseAddresses($address);
+        } else {
+            $this->replyTo[] = [$address, $name];
+        }
+
+        return $this;
+    }
+
+    /**
+     * Set the cc address for the mail message.
+     *
+     * @param  array|string  $address
+     * @param  string|null  $name
+     * @return $this
+     */
+    public function cc($address, $name = null)
+    {
+        if ($this->arrayOfAddresses($address)) {
+            $this->cc += $this->parseAddresses($address);
+        } else {
+            $this->cc[] = [$address, $name];
+        }
+
+        return $this;
+    }
+
+    /**
+     * Set the bcc address for the mail message.
+     *
+     * @param  array|string  $address
+     * @param  string|null  $name
+     * @return $this
+     */
+    public function bcc($address, $name = null)
+    {
+        if ($this->arrayOfAddresses($address)) {
+            $this->bcc += $this->parseAddresses($address);
+        } else {
+            $this->bcc[] = [$address, $name];
+        }
 
         return $this;
     }
@@ -191,5 +244,31 @@ class MailMessage extends SimpleMessage
     public function data()
     {
         return array_merge($this->toArray(), $this->viewData);
+    }
+
+    /**
+     * Parse the multi-address array into the necessary format.
+     *
+     * @param  array  $value
+     * @return array
+     */
+    protected function parseAddresses($value)
+    {
+        return collect($value)->map(function ($address, $name) {
+            return [$address, is_numeric($name) ? null : $name];
+        })->values()->all();
+    }
+
+    /**
+     * Determine if the given "address" is actually an array of addresses.
+     *
+     * @param  mixed  $address
+     * @return bool
+     */
+    protected function arrayOfAddresses($address)
+    {
+        return is_array($address) ||
+               $address instanceof Arrayable ||
+               $address instanceof Traversable;
     }
 }
