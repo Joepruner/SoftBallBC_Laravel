@@ -23,7 +23,9 @@
     "datatables.net-keytable-jqui": "^2.5.0",
     "datatables.net-responsive-jqui": "^2.2.3",
     "datatables.net-scroller-jqui": "^1.5.1",
+    "datatables.net-select-dt": "^1.2.7",
     "datatables.net-select-jqui": "^1.2.7",
+    "jquery-ui": "^1.12.1",
     "jshint": "^2.10.1",
     "jszip": "^3.2.0",
     "pdfmake": "^0.1.53"
