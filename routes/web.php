@@ -1,5 +1,9 @@
 <?php
 
+use Yajra\DataTables\DataTables;
+
+use App\Team;
+use App\Http\Controllers\TeamController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -26,5 +30,5 @@ Route::resource('teams','TeamController');
 
 Route::resource('active_people','ActivePersonController');
 
-Route::get('eloquent/array', 'Eloquent\ArrayResponseController@index');
-Route::get('eloquent/array-data', 'Eloquent\ArrayResponseController@data');
+// Route::get('teams', 'TeamController@index')->name('teams.index');
+

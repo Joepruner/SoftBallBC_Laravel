@@ -3,6 +3,11 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Http\Controllers\Controller;
+use App\Team;
+use App\ActivePerson;
+use DB;
+use Yajra\DataTables\DataTables;
 
 class ActivePersonController extends Controller
 {
@@ -13,7 +18,8 @@ class ActivePersonController extends Controller
      */
     public function index()
     {
-        //
+        $query = DB::table('active_people');
+        return Datatables::of($query)->toJson();
     }
 
     /**
@@ -45,7 +51,7 @@ class ActivePersonController extends Controller
      */
     public function show($id)
     {
-        //
+
     }
 
     /**

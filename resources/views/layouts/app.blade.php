@@ -36,12 +36,13 @@
             />
         <!-- <link rel="stylesheet" type="text/css"
                 href="https://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css"/> -->
-        <link rel="stylesheet" type="text/css"
+        <!-- <link rel="stylesheet" type="text/css"
             href="https://cdn.datatables.net/1.10.18/css/dataTables.jqueryui.min.css"
-            />
+            /> -->
         <link rel="stylesheet" type="text/css"
             href="https://cdn.datatables.net/select/1.2.7/css/select.dataTables.min.css"
             />
+
     </head>
 
 </head>
@@ -75,7 +76,7 @@
                     </ul>
 
                     <!-- Right Side Of Navbar -->
-                    <ul class="nav navbar-nav navbar-right ">
+                    <ul class="nav navbar-nav navbar-right">
                         <!-- Authentication Links -->
                         @if (Auth::guest())
                         <li><a href="{{ url('/login') }}">Login</a></li>
@@ -133,11 +134,13 @@
             src="https://code.jquery.com/jquery-3.3.1.js"></script> -->
         <!--Datatables-->
         <script type="text/javascript"
-            src="https://cdn.datatables.net/1.10.18/js/jquery.dataTables.min.js"></script>
+            src="https://cdn.datatables.net/1.10.19/js/jquery.dataTables.min.js"></script>
         <script type="text/javascript"
             src="https://cdn.datatables.net/1.10.18/js/dataTables.jqueryui.min.js"></script>
         <script type="text/javascript"
             src="https://cdn.datatables.net/v/ju-1.12.1/dt-1.10.18/sl-1.2.6/datatables.min.js"></script>
+        <!-- <script type="text/javascript"
+            src="https://cdn.datatables.net/select/1.2.7/js/dataTables.select.min.js"></script> -->
         <!--Bootstrap Javascript-->
         <script
             src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
@@ -147,15 +150,14 @@
 
 
         <!--App scripts-->
-        @stack('scripts')
+        @yield('scripts')
 
 
 
 
 
 
-        <!-- <script type="text/javascript"
-        src="https://cdn.datatables.net/select/1.2.7/js/dataTables.select.min.js"></script> -->
+
         <!-- <script type="text/javascript"
         src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.36/pdfmake.min.js"></script> -->
         <!-- <script type="text/javascript"

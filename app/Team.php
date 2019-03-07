@@ -7,7 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class Team extends Model
 {
-    Use NOtifiable;
+    Use Notifiable;
 
     Protected $table = 'teams';
 
