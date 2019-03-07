@@ -34,13 +34,12 @@ class Kernel implements KernelContract
      * @var array
      */
     protected $bootstrappers = [
-        'Illuminate\Foundation\Bootstrap\DetectEnvironment',
-        'Illuminate\Foundation\Bootstrap\LoadConfiguration',
-        'Illuminate\Foundation\Bootstrap\ConfigureLogging',
-        'Illuminate\Foundation\Bootstrap\HandleExceptions',
-        'Illuminate\Foundation\Bootstrap\RegisterFacades',
-        'Illuminate\Foundation\Bootstrap\RegisterProviders',
-        'Illuminate\Foundation\Bootstrap\BootProviders',
+        \Illuminate\Foundation\Bootstrap\LoadEnvironmentVariables::class,
+        \Illuminate\Foundation\Bootstrap\LoadConfiguration::class,
+        \Illuminate\Foundation\Bootstrap\HandleExceptions::class,
+        \Illuminate\Foundation\Bootstrap\RegisterFacades::class,
+        \Illuminate\Foundation\Bootstrap\RegisterProviders::class,
+        \Illuminate\Foundation\Bootstrap\BootProviders::class,
     ];
 
     /**
@@ -67,7 +66,7 @@ class Kernel implements KernelContract
     /**
      * The priority-sorted list of middleware.
      *
-     * Forces the listed middleware to always be in the given order.
+     * Forces non-global middleware to always be in the given order.
      *
      * @var array
      */
@@ -99,7 +98,7 @@ class Kernel implements KernelContract
         }
 
         foreach ($this->routeMiddleware as $key => $middleware) {
-            $router->middleware($key, $middleware);
+            $router->aliasMiddleware($key, $middleware);
         }
     }
 
@@ -125,7 +124,9 @@ class Kernel implements KernelContract
             $response = $this->renderException($request, $e);
         }
 
-        $this->app['events']->fire('kernel.handled', [$request, $response]);
+        $this->app['events']->dispatch(
+            new Events\RequestHandled($request, $response)
+        );
 
         return $response;
     }
@@ -151,6 +152,32 @@ class Kernel implements KernelContract
     }
 
     /**
+     * Bootstrap the application for HTTP requests.
+     *
+     * @return void
+     */
+    public function bootstrap()
+    {
+        if (! $this->app->hasBeenBootstrapped()) {
+            $this->app->bootstrapWith($this->bootstrappers());
+        }
+    }
+
+    /**
+     * Get the route dispatcher callback.
+     *
+     * @return \Closure
+     */
+    protected function dispatchToRouter()
+    {
+        return function ($request) {
+            $this->app->instance('request', $request);
+
+            return $this->router->dispatch($request);
+        };
+    }
+
+    /**
      * Call the terminate method on any terminable middleware.
      *
      * @param  \Illuminate\Http\Request  $request
@@ -158,6 +185,20 @@ class Kernel implements KernelContract
      * @return void
      */
     public function terminate($request, $response)
+    {
+        $this->terminateMiddleware($request, $response);
+
+        $this->app->terminate();
+    }
+
+    /**
+     * Call the terminate method on any terminable middleware.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @param  \Illuminate\Http\Response  $response
+     * @return void
+     */
+    protected function terminateMiddleware($request, $response)
     {
         $middlewares = $this->app->shouldSkipMiddleware() ? [] : array_merge(
             $this->gatherRouteMiddleware($request),
@@ -169,7 +210,7 @@ class Kernel implements KernelContract
                 continue;
             }
 
-            list($name, $parameters) = $this->parseMiddleware($middleware);
+            [$name] = $this->parseMiddleware($middleware);
 
             $instance = $this->app->make($name);
 
@@ -177,8 +218,6 @@ class Kernel implements KernelContract
                 $instance->terminate($request, $response);
             }
         }
-
-        $this->app->terminate();
     }
 
     /**
@@ -204,13 +243,24 @@ class Kernel implements KernelContract
      */
     protected function parseMiddleware($middleware)
     {
-        list($name, $parameters) = array_pad(explode(':', $middleware, 2), 2, []);
+        [$name, $parameters] = array_pad(explode(':', $middleware, 2), 2, []);
 
         if (is_string($parameters)) {
             $parameters = explode(',', $parameters);
         }
 
         return [$name, $parameters];
+    }
+
+    /**
+     * Determine if the kernel has a given middleware.
+     *
+     * @param  string  $middleware
+     * @return bool
+     */
+    public function hasMiddleware($middleware)
+    {
+        return in_array($middleware, $this->middleware);
     }
 
     /**
@@ -244,43 +294,6 @@ class Kernel implements KernelContract
     }
 
     /**
-     * Bootstrap the application for HTTP requests.
-     *
-     * @return void
-     */
-    public function bootstrap()
-    {
-        if (! $this->app->hasBeenBootstrapped()) {
-            $this->app->bootstrapWith($this->bootstrappers());
-        }
-    }
-
-    /**
-     * Get the route dispatcher callback.
-     *
-     * @return \Closure
-     */
-    protected function dispatchToRouter()
-    {
-        return function ($request) {
-            $this->app->instance('request', $request);
-
-            return $this->router->dispatch($request);
-        };
-    }
-
-    /**
-     * Determine if the kernel has a given middleware.
-     *
-     * @param  string  $middleware
-     * @return bool
-     */
-    public function hasMiddleware($middleware)
-    {
-        return in_array($middleware, $this->middleware);
-    }
-
-    /**
      * Get the bootstrap classes for the application.
      *
      * @return array
@@ -311,6 +324,16 @@ class Kernel implements KernelContract
     protected function renderException($request, Exception $e)
     {
         return $this->app[ExceptionHandler::class]->render($request, $e);
+    }
+
+    /**
+     * Get the application's route middleware groups.
+     *
+     * @return array
+     */
+    public function getMiddlewareGroups()
+    {
+        return $this->middlewareGroups;
     }
 
     /**

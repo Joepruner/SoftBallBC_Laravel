@@ -2,9 +2,12 @@
 
 namespace App\Http\Controllers;
 
-use Request;
+use Illuminate\Http\Request;
+use App\Http\Controllers\Controller;
 use App\Team;
 use App\ActivePerson;
+use DB;
+use Yajra\DataTables\DataTables;
 
 class TeamController extends Controller
 {
@@ -15,7 +18,14 @@ class TeamController extends Controller
      */
     public function index()
     {
-        //
+        $query = DB::table('teams');
+        return Datatables::of($query)->toJson();
+
+        // ->with('name'))
+        // ->addColumn('team_name', function($row){
+        //     return $row->team->name;
+        // })
+        // ->make(true);
     }
 
     /**
@@ -25,7 +35,7 @@ class TeamController extends Controller
      */
     public function create()
     {
-        //
+        // return view('teams/team_view');
     }
 
     /**
@@ -47,9 +57,13 @@ class TeamController extends Controller
      */
     public function show($id)
     {
-        $teams = Team::all();
-        $active_people = ActivePerson::all();
-        return view('teams.team_view', compact('teams','active_people'));
+            $teams = Team::all();
+            $active_people = ActivePerson::all();
+            // return view ('teams.team_view')->withData($teams);
+        // $teams = Team::all();
+        // $active_people = ActivePerson::all();
+        return view('teams.team_view', compact('teams', 'active_people'));
+        // return Datatables::of(Team::query())->make(true);
     }
 
     /**
@@ -74,6 +88,8 @@ class TeamController extends Controller
     {
         //
     }
+
+
 
     /**
      * Remove the specified resource from storage.
