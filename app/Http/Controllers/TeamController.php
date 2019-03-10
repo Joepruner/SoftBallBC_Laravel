@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Team;
 use App\ActivePerson;
+use App\Person;
 use DB;
 use Yajra\DataTables\DataTables;
 
@@ -20,12 +21,6 @@ class TeamController extends Controller
     {
         $query = DB::table('teams');
         return Datatables::of($query)->toJson();
-
-        // ->with('name'))
-        // ->addColumn('team_name', function($row){
-        //     return $row->team->name;
-        // })
-        // ->make(true);
     }
 
     /**
@@ -57,13 +52,11 @@ class TeamController extends Controller
      */
     public function show($id)
     {
-            $teams = Team::all();
-            $active_people = ActivePerson::all();
-            // return view ('teams.team_view')->withData($teams);
-        // $teams = Team::all();
-        // $active_people = ActivePerson::all();
-        return view('teams.team_view', compact('teams', 'active_people'));
-        // return Datatables::of(Team::query())->make(true);
+        $teams = Team::all();
+        $active_people = ActivePerson::all();
+        $people = Person::all();
+
+        return view('teams.team_view', compact('teams', 'active_people', 'people'));
     }
 
     /**

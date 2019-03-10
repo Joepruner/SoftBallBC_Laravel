@@ -2,9 +2,8 @@
 
 <!DOCTYPE html>
 <html lang="en">
+
     <head>
-
-
         <meta charset="utf-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -23,6 +22,7 @@
         <!-- Styles -->
 
         @yield('style')
+        <link href="https://cdn.datatables.net/buttons/1.5.6/css/buttons.dataTables.min.css" rel="stylesheet">
         <link
             href="https://cdn.datatables.net/1.10.19/css/jquery.dataTables.min.css"
             rel="stylesheet">
@@ -139,6 +139,9 @@
             src="https://cdn.datatables.net/1.10.18/js/dataTables.jqueryui.min.js"></script>
         <script type="text/javascript"
             src="https://cdn.datatables.net/v/ju-1.12.1/dt-1.10.18/sl-1.2.6/datatables.min.js"></script>
+        <script type="text/javascript"
+            src="https://cdn.datatables.net/buttons/1.5.6/js/dataTables.buttons.min.js"></script>
+
         <!-- <script type="text/javascript"
             src="https://cdn.datatables.net/select/1.2.7/js/dataTables.select.min.js"></script> -->
         <!--Bootstrap Javascript-->

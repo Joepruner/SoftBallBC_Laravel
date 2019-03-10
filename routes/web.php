@@ -4,6 +4,7 @@ use Yajra\DataTables\DataTables;
 
 use App\Team;
 use App\Http\Controllers\TeamController;
+use App\Http\Controllers\ActivePersonController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -30,5 +31,10 @@ Route::resource('teams','TeamController');
 
 Route::resource('active_people','ActivePersonController');
 
-// Route::get('teams', 'TeamController@index')->name('teams.index');
+// Route::get('/addPlayerToTeam', [
+// 'uses' => 'ActivePersonController@addPlayerToTeam',
+//     'as'   => 'addPlayerToTeam'
+//   ]);
 
+Route::post('/teams/addperson', 'ActivePersonController@addPersonToTeam');
+Route::post('/teams/removeperson', 'ActivePersonController@removePersonFromTeam');

@@ -3,6 +3,9 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Http\Controllers\Controller;
+use DB;
+use Yajra\DataTables\DataTables;
 
 class PersonController extends Controller
 {
@@ -13,7 +16,12 @@ class PersonController extends Controller
      */
     public function index()
     {
-        //
+        $query = DB::table('active_people')
+            ->rightJoin('people', 'active_people.person_id', '=', 'people.id')
+            ->where('active_people.person_id','=', null)
+            ->get();
+
+        return DataTables::of($query)->toJson();
     }
 
     /**

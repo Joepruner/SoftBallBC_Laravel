@@ -1,4 +1,4 @@
-.col-container {
+/* .col-container {
     display: flex;
     width: 100%;
     color: blue !important;
@@ -8,7 +8,7 @@
   .col {
     flex: 1;
     padding: 16px;
-  }
+  } */
 
 /* @media only screen and (max-width: 600px) {
     .col {
