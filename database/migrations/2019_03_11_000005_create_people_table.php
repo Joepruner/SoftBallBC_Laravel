@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateActivePeopleTable extends Migration
+class CreatePeopleTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,14 +13,12 @@ class CreateActivePeopleTable extends Migration
      */
     public function up()
     {
-        Schema::create('active_people', function (Blueprint $table) {
+        Schema::create('people', function (Blueprint $table) {
             $table->increments('id');
             $table->string('first_name');
             $table->string('last_name');
             $table->date('birth_date');
-            $table->string('category')->nullable();
-            $table->string('type')->nullable();
-            $table->string('membership_id');
+            $table->string('membership_id')->unique();
             $table->string('email');
             $table->string('phone');
             $table->string('address_line_1');
@@ -29,18 +27,6 @@ class CreateActivePeopleTable extends Migration
             $table->string('province');
             $table->string('zip_code')->nullable();
             $table->string('country')->nullable();
-            $table->integer('team_id')->unsigned();
-            $table->integer('person_id')->unsigned();
-            $table->foreign('team_id')
-                ->references('id')
-                ->on('teams')
-                ->onDelete('SET NULL')
-                ->nullable();
-            $table->foreign('person_id')
-                ->references('id')
-                ->on('people')
-                ->onDelete('SET NULL')
-                ->nullable();
             $table->timestamps();
         });
     }
@@ -52,8 +38,6 @@ class CreateActivePeopleTable extends Migration
      */
     public function down()
     {
-        Schema::drop('active_people');
+        Schema::drop('people');
     }
-
-
 }

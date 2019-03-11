@@ -168,6 +168,10 @@ teams_dt.on('select', function (e, dt, type, indexes) {
         $('#active_people_table_title').text(team_name[0]);
     }
 });
+teams_dt.on('deselect', function (e, dt, type, indexes) {
+        active_people_dt.column(0).search('(..?)', true).draw();
+        $('#active_people_table_title').text("People in teams");
+});
 
 $('#add_person_to_team_button').on('click', function(){
     var person_id = people_dt.rows(".selected").data().pluck('id')[0];

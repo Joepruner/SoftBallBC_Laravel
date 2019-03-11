@@ -12,14 +12,12 @@ class ActivePeopleTableSeeder extends Seeder
      */
     public function run()
     {
-        $people = DB::table('people')->inRandomOrder()->take(50)->get();
-
-
+        $people = DB::table('people')->inRandomOrder()->take(5000)->get();
         foreach ($people as $person) {
             $randomTeam = DB::table('teams')
             ->inRandomOrder()
             ->first();
-            $activepeople = factory(\App\ActivePerson::class, 1)->create([
+            factory(\App\ActivePerson::class, 1)->create([
                 'person_id' => $person->id,
                 'team_id' => $randomTeam->id,
                 'first_name' => $person->first_name,
