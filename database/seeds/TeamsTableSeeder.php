@@ -11,6 +11,12 @@ class TeamsTableSeeder extends Seeder
      */
     public function run()
     {
-        $teams = factory(\App\Team::class, 20)->create();
+        for ($i = 0; $i < 200; $i++) {
+            $club_id = DB::table('clubs')->inRandomOrder()->first()->id;
+            factory(App\Team::class, 1)->create([
+                'club_id' => $club_id,
+            ]);
+        }
     }
 }
+

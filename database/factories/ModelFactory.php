@@ -79,3 +79,46 @@ $factory->define(App\Team::class, function(Faker\Generator $faker){
 
     ];
 });
+
+$factory->define(App\Club::class, function (Faker\Generator $faker) {
+
+    $faker = Faker\Factory::create(('en_CA'));
+
+    return [
+        'name' => $faker->company,
+        // 'district' => $faker->buildingNumber,
+        'description' => $faker->paragraphs($nb = 1, $asText = true),
+        'contact_first_name' => $faker->firstName,
+        'contact_last_name' => $faker->lastName,
+        'email' => $faker->email,
+        'phone' => $faker->phoneNumber,
+        'address_line_1' => $faker->streetAddress,
+        'address_line_2' => $faker->buildingNumber,
+        'city' => $faker->city,
+        'province' => $faker->province,
+        'zip_code' => $faker->postcode,
+        'country' => 'Canada',
+        'website' => $faker->url,
+        'year_established' => $faker->year($max='now'),
+
+    ];
+});
+
+$factory->define(App\District::class, function(Faker\Generator $faker){
+
+
+    return[
+        'name' => $faker->state,
+        'number' => $faker->buildingNumber,
+
+
+    ];
+});
+
+$factory->define(App\Organization::class, function(Faker\Generator $faker){
+
+
+    return[
+        'name' => $faker->catchPhrase,
+    ];
+});

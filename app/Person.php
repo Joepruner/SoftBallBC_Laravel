@@ -22,6 +22,6 @@ class Person extends Model
     ];
 
     public function activeperson(){
-        return $this->hasMany('App\Activeperson');
+        return $this->hasMany('App\ActivePerson');
     }
 }

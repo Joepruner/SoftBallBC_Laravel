@@ -25,12 +25,12 @@ class ActivePerson extends Model
         'team_id','person_id'
     ];
 
-    public function team()
+    public function active_person_belongs_to_team()
     {
         return $this->belongsTo('App\Team');
     }
 
-    public function person()
+    public function active_person_belongs_to_person()
     {
         return $this->belongsTo('App\Person');
     }
