@@ -87,7 +87,7 @@ $factory->define(App\Club::class, function (Faker\Generator $faker) {
     return [
         'name' => $faker->company,
         // 'district' => $faker->buildingNumber,
-        'description' => $faker->paragraphs($nb = 1, $asText = true),
+        'description' => $faker->paragraphs($nb = 3, $asText = true),
         'contact_first_name' => $faker->firstName,
         'contact_last_name' => $faker->lastName,
         'email' => $faker->email,

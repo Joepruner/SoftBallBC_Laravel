@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use App\ActivePerson;
+use App\Person;
 use DB;
 use Yajra\DataTables\DataTables;
 
@@ -53,7 +55,10 @@ class PersonController extends Controller
      */
     public function show($id)
     {
-        //
+        $active_people = ActivePerson::all();
+        $people = Person::all();
+
+        return view('people.all_people_view', compact('active_people','people'));
     }
 
     /**
