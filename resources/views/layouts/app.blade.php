@@ -22,7 +22,9 @@
         <!-- Styles -->
 
         @yield('style')
-        <link href="https://cdn.datatables.net/buttons/1.5.6/css/buttons.dataTables.min.css" rel="stylesheet">
+        <link
+            href="https://cdn.datatables.net/buttons/1.5.6/css/buttons.dataTables.min.css"
+            rel="stylesheet">
         <link
             href="https://cdn.datatables.net/1.10.19/css/jquery.dataTables.min.css"
             rel="stylesheet">
@@ -50,6 +52,7 @@
     <div id="app">
         <nav class="navbar-default navbar-static-top">
             <div class="container">
+
                 <div class="navbar-header">
 
                     <!-- Collapsed Hamburger -->
@@ -70,6 +73,7 @@
 
                 <div class="collapse navbar-collapse"
                     id="app-navbar-collapse">
+
                     <!-- Left Side Of Navbar -->
                     <ul class="nav navbar-nav">
                         &nbsp;
@@ -123,6 +127,31 @@
                     </ul>
                 </div>
             </div>
+            @if (Auth::user())
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-3">
+                        <a href="{{ route('people.show', Auth::user()) }}">
+                            People
+                        </a>
+                    </div>
+                    <div class="col-md-3">
+                        <a href="{{ route('teams.show', Auth::user()) }}">
+                            Teams
+                        </a>
+                    </div>
+                    <div class="col-md-2">
+                        <a>Clubs</a>
+                    </div>
+                    <div class="col-md-2">
+                        <a>Tournaments</a>
+                    </div>
+                    <div class="col-md-2">
+                        <a>Reports</a>
+                    </div>
+                </div>
+            </div>
+            @endif
         </nav>
 
         @yield('content')
@@ -141,7 +170,6 @@
             src="https://cdn.datatables.net/v/ju-1.12.1/dt-1.10.18/sl-1.2.6/datatables.min.js"></script>
         <script type="text/javascript"
             src="https://cdn.datatables.net/buttons/1.5.6/js/dataTables.buttons.min.js"></script>
-
         <!-- <script type="text/javascript"
             src="https://cdn.datatables.net/select/1.2.7/js/dataTables.select.min.js"></script> -->
         <!--Bootstrap Javascript-->
@@ -167,3 +195,26 @@
         src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.36/vfs_fonts.js"></script> -->
     </body>
 </html>
+
+
+<!-- @if (Auth::user())
+<div class="container">
+    <div class="row">
+        <div class="col">
+            People and players
+        </div>
+        <div class="col">
+            Teams
+        </div>
+        <div class="col">
+            Clubs
+        </div>
+        <div class="col">
+            Tournaments
+        </div>
+        <div class="col">
+            Reports
+        </div>
+    </div>
+</div>
+@endif -->

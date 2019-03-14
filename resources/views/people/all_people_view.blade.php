@@ -9,7 +9,7 @@
 @section('content')
 
 
-<h1>View and edit teams</h1>
+<h1>View and edit people</h1>
 
 <div class="container">
     <div class="row col-container">
@@ -30,29 +30,9 @@
             </table>
         </div>
         <div class="col col-md-6">
-            <table id="teams_table" class="display compact nowrap"
-                style="width:100%">
-                <h3>Teams</h3>
-                <thead>
-                    <tr>
-                        <!-- <th>Edit</th> -->
-                        <th>Id</th>
-                        <th>Name</th>
-
-                    </tr>
-                </thead>
-
-            </table>
-        </div>
-
-    </div>
-    <div class="row col-container">
-        <div class="col col-md-6">
-        </div>
-        <div class="col col-md-6">
             <table id="active_people_table" class="display compact nowrap"
                 style="width:100%">
-                <h3 id="active_people_table_title">People in teams</h3>
+                <h3>People in teams</h3>
                 <thead>
                     <tr>
                         <!-- <th>Edit</th> -->
@@ -94,30 +74,10 @@ function get_people_datatable() {
         dom: '<lf<t>ipB>',
         buttons: [
             {
-                text: 'Add to team',
-                attr: {id: 'add_person_to_team_button'},
+                text: 'Edit Person',
+                attr: {id: 'ex'},
             }
         ]
-    });
-    return dt;
-}
-
-function get_teams_datatable() {
-    var dt = $('#teams_table').DataTable({
-        "processing": true,
-        "serverSide": true,
-        "ajax": "{{ route('teams.index') }}",
-        "columns": [
-            { "data": "id" },
-            { "data": "name" },
-        ],
-        select: {
-            style: 'single',
-            selector: 'tr',
-        },
-       // "scrollY":        "200px",
-        //"scrollCollapse": true,
-        "paging":         true,
     });
     return dt;
 }
@@ -143,7 +103,7 @@ function get_active_people_datatable() {
         dom: '<lf<t>ipB>',
         buttons: [
             {
-                text: 'Remove from team',
+                text: 'Edit active person',
                 attr: {id: 'remove_person_from_team_button'},
             }
         ]
@@ -158,20 +118,7 @@ var active_people_dt = get_active_people_datatable();
 
 var people_dt = get_people_datatable();
 
-var teams_dt = get_teams_datatable();
 
-teams_dt.on('select', function (e, dt, type, indexes) {
-    if (type == 'row') {
-        var team_id = teams_dt.rows(indexes).data().pluck('id');
-        var team_name = teams_dt.rows(indexes).data().pluck('name');
-        active_people_dt.column(0).search('^(' + team_id[0] + ')$', true).draw();
-        $('#active_people_table_title').text(team_name[0]);
-    }
-});
-teams_dt.on('deselect', function (e, dt, type, indexes) {
-        active_people_dt.column(0).search('(..?)', true).draw();
-        $('#active_people_table_title').text("People in teams");
-});
 
 $('#add_person_to_team_button').on('click', function(){
     var person_id = people_dt.rows(".selected").data().pluck('id')[0];
