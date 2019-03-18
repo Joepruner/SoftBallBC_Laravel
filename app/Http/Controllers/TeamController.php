@@ -30,7 +30,7 @@ class TeamController extends Controller
      */
     public function create()
     {
-        // return view('teams/team_view');
+        return view('teams.team_create');
     }
 
     /**
@@ -41,7 +41,7 @@ class TeamController extends Controller
      */
     public function store(Request $request)
     {
-        //
+
     }
     /**
      * Display the specified resource.
@@ -64,9 +64,11 @@ class TeamController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit(Request $data)
     {
-        //
+        $team_id = $data->input('tid');
+        $team =  DB::table('teams')->where('id',$team_id)->first();
+        return view('teams.team_edit', compact('team'));
     }
 
     /**
@@ -78,7 +80,9 @@ class TeamController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $team = \App\Team::find($id);
+        $team->update($request->all());
+        return back()->with('success','Team updated successfully!');
     }
 
 

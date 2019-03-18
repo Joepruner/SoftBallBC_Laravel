@@ -101,9 +101,11 @@ class ActivePersonController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit(Request $data)
     {
-        //
+        $active_person_id = $data->input('apid');
+        $active_person =  DB::table('active_people')->where('id',$active_person_id)->first();
+        return view('active_people.active_person_edit', compact('active_person'));
     }
 
     /**
@@ -115,7 +117,10 @@ class ActivePersonController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+
+        $active_person = \App\ActivePerson::find($id);
+        $active_person->update($request->all());
+        return back()->with('success','Active person updated successfully!');
     }
 
     /**

@@ -38,3 +38,8 @@ Route::resource('active_people','ActivePersonController');
 
 Route::post('/teams/addperson', 'ActivePersonController@addPersonToTeam');
 Route::post('/teams/removeperson', 'ActivePersonController@removePersonFromTeam');
+
+Route::post('/people/editPerson', 'PersonController@edit');
+Route::post('/teams/editTeam', 'TeamController@edit');
+Route::post('/teams/createTeam', 'TeamController@create');
+Route::post('/activePeople/editActivePerson', 'ActivePersonController@edit');
