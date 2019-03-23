@@ -9,6 +9,7 @@ use App\ActivePerson;
 use App\Person;
 use DB;
 use Yajra\DataTables\DataTables;
+use Carbon\Carbon;
 
 class TeamController extends Controller
 {
@@ -30,7 +31,7 @@ class TeamController extends Controller
      */
     public function create()
     {
-        // return view('teams/team_view');
+        return view('teams.team_create');
     }
 
     /**
@@ -41,7 +42,15 @@ class TeamController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        DB::table('teams')->insert([
+            ['name' => $request->name,
+            'season' => $request->season,
+            'registered' => $request->registered,
+            'club_id' => $request->club_id,
+            'created_at' => Carbon::now()->toDateTimeString(),
+            'updated_at' => Carbon::now()->toDateTimeString()]
+        ]);
+        return back()->with('success','Team created successfully!');
     }
     /**
      * Display the specified resource.
@@ -64,9 +73,11 @@ class TeamController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit(Request $data)
     {
-        //
+        $team_id = $data->input('tid');
+        $team =  DB::table('teams')->where('id',$team_id)->first();
+        return view('teams.team_edit', compact('team'));
     }
 
     /**
@@ -78,7 +89,9 @@ class TeamController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $team = \App\Team::find($id);
+        $team->update($request->all());
+        return back()->with('success','Team updated successfully!');
     }
 
 

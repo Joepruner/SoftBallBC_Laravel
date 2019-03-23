@@ -4,10 +4,13 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
-use App\ActivePerson;
 use App\Person;
+use App\ActivePerson;
 use DB;
 use Yajra\DataTables\DataTables;
+use phpDocumentor\Reflection\Types\Integer;
+use Illuminate\Support\Facades\Redirect;
+use Illuminate\Console\Scheduling\Event;
 
 class PersonController extends Controller
 {
@@ -64,12 +67,14 @@ class PersonController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  int  $id
+     * @param  int  $data
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit(Request $id)
     {
-        //
+        $person_id = $id->input('pid');
+        $person =  DB::table('people')->where('id',$person_id)->first();
+        return view('people.person_edit', compact('person'));
     }
 
     /**
@@ -81,7 +86,9 @@ class PersonController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $person = \App\Person::find($id);
+        $person->update($request->all());
+        return back()->with('success','Inactive person updated successfully!');
     }
 
     /**

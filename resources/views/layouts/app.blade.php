@@ -22,6 +22,7 @@
         <!-- Styles -->
 
         @yield('style')
+
         <link
             href="https://cdn.datatables.net/buttons/1.5.6/css/buttons.dataTables.min.css"
             rel="stylesheet">
@@ -34,16 +35,15 @@
         <link rel="stylesheet"
             href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.7.0/animate.min.css">
         <link rel="stylesheet" type="text/css"
-            href="https://cdn.datatables.net/v/ju-1.12.1/dt-1.10.18/sl-1.2.6/datatables.min.css"
-            />
-        <!-- <link rel="stylesheet" type="text/css"
-                href="https://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css"/> -->
-        <!-- <link rel="stylesheet" type="text/css"
-            href="https://cdn.datatables.net/1.10.18/css/dataTables.jqueryui.min.css"
-            /> -->
+            href="https://cdn.datatables.net/v/ju-1.12.1/dt-1.10.18/sl-1.2.6/datatables.min.css"/>
         <link rel="stylesheet" type="text/css"
-            href="https://cdn.datatables.net/select/1.2.7/css/select.dataTables.min.css"
-            />
+                href="https://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css"/>
+        <link rel="stylesheet" type="text/css"
+            href="https://cdn.datatables.net/1.10.18/css/dataTables.jqueryui.min.css"/>
+        <link rel="stylesheet" type="text/css"
+            href="https://cdn.datatables.net/responsive/2.2.3/css/responsive.jqueryui.min.css"/>
+        <link rel="stylesheet" type="text/css"
+            href="https://cdn.datatables.net/select/1.2.7/css/select.dataTables.min.css"/>
 
     </head>
 
@@ -159,8 +159,8 @@
         <!-- jQuery -->
         <script
             src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
-        <!-- <script type="text/javascript"
-            src="https://code.jquery.com/jquery-3.3.1.js"></script> -->
+        <script type="text/javascript"
+            src="https://code.jquery.com/jquery-3.3.1.js"></script>
         <!--Datatables-->
         <script type="text/javascript"
             src="https://cdn.datatables.net/1.10.19/js/jquery.dataTables.min.js"></script>
@@ -170,11 +170,20 @@
             src="https://cdn.datatables.net/v/ju-1.12.1/dt-1.10.18/sl-1.2.6/datatables.min.js"></script>
         <script type="text/javascript"
             src="https://cdn.datatables.net/buttons/1.5.6/js/dataTables.buttons.min.js"></script>
+        <script type="text/javascript"
+            src="https://cdn.datatables.net/responsive/2.2.3/js/dataTables.responsive.min.js"></script>
+        <script type="text/javascript"
+            src="https://cdn.datatables.net/responsive/2.2.3/js/responsive.jqueryui.min.js"></script>
+        <script type="text/javascript"
+            src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+        <!-- <script type="text/javascript"
+            src="https://cdn.datatables.net/responsive/2.2.3/js/responsive.bootstrap.min.js"></script> -->
         <!-- <script type="text/javascript"
             src="https://cdn.datatables.net/select/1.2.7/js/dataTables.select.min.js"></script> -->
         <!--Bootstrap Javascript-->
+
         <script
-            src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
+            src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
         {{-- <script src="{{ elixir('js/app.js') }}"></script> --}}
 
 
@@ -182,39 +191,5 @@
 
         <!--App scripts-->
         @yield('scripts')
-
-
-
-
-
-
-
-        <!-- <script type="text/javascript"
-        src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.36/pdfmake.min.js"></script> -->
-        <!-- <script type="text/javascript"
-        src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.36/vfs_fonts.js"></script> -->
     </body>
 </html>
-
-
-<!-- @if (Auth::user())
-<div class="container">
-    <div class="row">
-        <div class="col">
-            People and players
-        </div>
-        <div class="col">
-            Teams
-        </div>
-        <div class="col">
-            Clubs
-        </div>
-        <div class="col">
-            Tournaments
-        </div>
-        <div class="col">
-            Reports
-        </div>
-    </div>
-</div>
-@endif -->
