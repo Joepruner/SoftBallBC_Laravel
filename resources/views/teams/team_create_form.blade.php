@@ -4,13 +4,15 @@
 </div>
 
 <div class='form-group'>
-    {!! Form::label('season', 'Last Season:') !!}
-    {!! Form::text('season', null, ['class' => 'form-control']) !!}
+    {!! Form::label('season', 'Season:') !!}
+    {!! Form::select('season', array('spring' => 'Spring', 'summer'=>'Summer','fall'=>'Fall' ),
+    null, ['class' => 'form-control', 'placeholder' => 'Select a season']) !!}
 </div>
 
 <div class='form-group'>
         {!! Form::label('registered', 'Registered:') !!}
-        {!! Form::text('registered', null, ['class' => 'form-control']) !!}
+        {!! Form::select('registered', array(0=>'No', 1=>'Yes'),
+        null, ['class' => 'form-control']) !!}
 </div>
 
 <div class='form-group'>

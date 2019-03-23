@@ -9,6 +9,7 @@ use App\ActivePerson;
 use App\Person;
 use DB;
 use Yajra\DataTables\DataTables;
+use Carbon\Carbon;
 
 class TeamController extends Controller
 {
@@ -41,7 +42,15 @@ class TeamController extends Controller
      */
     public function store(Request $request)
     {
-
+        DB::table('teams')->insert([
+            ['name' => $request->name,
+            'season' => $request->season,
+            'registered' => $request->registered,
+            'club_id' => $request->club_id,
+            'created_at' => Carbon::now()->toDateTimeString(),
+            'updated_at' => Carbon::now()->toDateTimeString()]
+        ]);
+        return back()->with('success','Team created successfully!');
     }
     /**
      * Display the specified resource.

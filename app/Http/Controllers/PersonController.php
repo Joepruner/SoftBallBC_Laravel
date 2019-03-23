@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Person;
+use App\ActivePerson;
 use DB;
 use Yajra\DataTables\DataTables;
 use phpDocumentor\Reflection\Types\Integer;

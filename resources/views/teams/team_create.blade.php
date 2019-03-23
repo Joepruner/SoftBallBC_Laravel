@@ -12,8 +12,7 @@
 
             </div>
             <div class="modal-body">
-                {!! Form::model(['method' => 'GET', 'action' =>
-                ['TeamController@store']]) !!}
+                {!! Form::open(['action' => 'TeamController@store']) !!}
                 @include('teams.team_create_form', ['submitButtonText' =>
                 'Create'])
                 {!! Form::close() !!}
