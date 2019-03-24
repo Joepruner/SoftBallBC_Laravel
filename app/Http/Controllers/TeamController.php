@@ -50,7 +50,7 @@ class TeamController extends Controller
             'created_at' => Carbon::now()->toDateTimeString(),
             'updated_at' => Carbon::now()->toDateTimeString()]
         ]);
-        return back()->with('success','Team created successfully!');
+        return back()->with('success','Team successfully created!');
     }
     /**
      * Display the specified resource.

@@ -8,6 +8,7 @@ use App\Person;
 use App\ActivePerson;
 use DB;
 use Yajra\DataTables\DataTables;
+use Carbon\Carbon;
 use phpDocumentor\Reflection\Types\Integer;
 use Illuminate\Support\Facades\Redirect;
 use Illuminate\Console\Scheduling\Event;
@@ -23,7 +24,7 @@ class PersonController extends Controller
     {
         $query = DB::table('active_people')
             ->rightJoin('people', 'active_people.person_id', '=', 'people.id')
-            ->where('active_people.person_id','=', null)
+            ->where('active_people.person_id', '=', null)
             ->get();
 
         return DataTables::of($query)->toJson();
@@ -36,7 +37,7 @@ class PersonController extends Controller
      */
     public function create()
     {
-        //
+        return view('people.person_create');
     }
 
     /**
@@ -47,7 +48,23 @@ class PersonController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        DB::table('people')->insert([
+            ['first_name' => $request->first_name,
+            'last_name' => $request->last_name,
+            'birth_date' => $request->birth_date,
+            'membership_id' => $request->membership_id,
+            'email' => $request->email,
+            'phone' => $request->phone,
+            'address_line_1' => $request->address_line_1,
+            'address_line_2' => $request->address_line_2,
+            'city' => $request->city,
+            'province' => $request->province,
+            'zip_code' => $request->zip_code,
+            'country' => $request->country,
+            'created_at' => Carbon::now()->toDateTimeString(),
+            'updated_at' => Carbon::now()->toDateTimeString()]
+        ]);
+        return back()->with('success', 'Person successfully created!');
     }
 
     /**
@@ -61,7 +78,7 @@ class PersonController extends Controller
         $active_people = ActivePerson::all();
         $people = Person::all();
 
-        return view('people.all_people_view', compact('active_people','people'));
+        return view('people.all_people_view', compact('active_people', 'people'));
     }
 
     /**
@@ -73,7 +90,7 @@ class PersonController extends Controller
     public function edit(Request $id)
     {
         $person_id = $id->input('pid');
-        $person =  DB::table('people')->where('id',$person_id)->first();
+        $person =  DB::table('people')->where('id', $person_id)->first();
         return view('people.person_edit', compact('person'));
     }
 
@@ -88,7 +105,7 @@ class PersonController extends Controller
     {
         $person = \App\Person::find($id);
         $person->update($request->all());
-        return back()->with('success','Inactive person updated successfully!');
+        return back()->with('success', 'Inactive person updated successfully!');
     }
 
     /**
