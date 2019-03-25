@@ -141,14 +141,16 @@
                         </a>
                     </div>
                     <div class="col-md-2">
-                        <a>Clubs</a>
+                        <a href="{{ route('clubs.show', Auth::user()) }}">
+                            Clubs
+                        </a>
                     </div>
-                    <div class="col-md-2">
+                    <!-- <div class="col-md-2">
                         <a>Tournaments</a>
                     </div>
                     <div class="col-md-2">
                         <a>Reports</a>
-                    </div>
+                    </div> -->
                 </div>
             </div>
             @endif

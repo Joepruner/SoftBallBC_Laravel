@@ -17,9 +17,9 @@ class User extends Authenticatable
      * @var array
      */
     protected $fillable = [
-         'admin_level', 'team_id', 'email', 'first_name','last_name','birth_date'
+         'admin_level', 'email', 'first_name','last_name','birth_date'
          ,'phone','address_line_1', 'address_line_2','city','province'
-        ,'zip_code', 'country'
+        ,'zip_code', 'country', 'club_id', 'district_id', 'organization_id'
     ];
 
     /**

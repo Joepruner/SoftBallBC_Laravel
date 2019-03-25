@@ -29,6 +29,8 @@ Route::resource('people', 'PersonController');
 
 Route::resource('teams','TeamController');
 
+Route::resource('clubs','ClubController');
+
 Route::resource('active_people','ActivePersonController');
 
 // Route::get('/addPlayerToTeam', [

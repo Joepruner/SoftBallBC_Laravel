@@ -19,13 +19,10 @@ $factory->define(App\User::class, function (Faker\Generator $faker) {
     static $password;
 
     $faker = Faker\Factory::create(('en_CA'));
-    $al = array('ETO','EU');
     return [
-        'admin_level' => $al[rand(0,1)],
         'first_name' => $faker->firstName,
         'last_name' => $faker->lastName,
         'birth_date' => $faker->dateTimeThisCentury->format('Y-m-d'),
-        'team_id' => null,
         'email' => $faker->email,
         'phone' => $faker->phoneNumber,
         'address_line_1' => $faker->streetAddress,
@@ -40,9 +37,7 @@ $factory->define(App\User::class, function (Faker\Generator $faker) {
 });
 
 $factory->define(App\Person::class, function (Faker\Generator $faker) {
-
     $faker = Faker\Factory::create(('en_CA'));
-
     return [
         'first_name' => $faker->firstName,
         'last_name' => $faker->lastName,
@@ -56,7 +51,6 @@ $factory->define(App\Person::class, function (Faker\Generator $faker) {
         'province' => $faker->province,
         'zip_code' => $faker->postcode,
         'country' => 'Canada',
-
     ];
 });
 
@@ -106,9 +100,37 @@ $factory->define(App\Club::class, function (Faker\Generator $faker) {
 
 $factory->define(App\District::class, function(Faker\Generator $faker){
 
+        $district = array("Alberni-Clayoquot",
+        "Bulkley-Nechako",
+        "Capital",
+        "Cariboo",
+        "Central Coast",
+        "Central Kootenay",
+        "Central Okanagan",
+        "Columbia Shuswap",
+        "Comox Valley",
+        "Cowichan Valley",
+        "East Kootenay",
+        "Fraser Valley",
+        "Fraser-Fort George",
+        "Islands Trust",
+        "Kitimat-Stikine",
+        "Kootenay-Boundary",
+        "Metro Vancouver",
+        "Mount Waddington",
+        "Nanaimo",
+        "North Okanagan",
+        "North Coast",
+        "Okanagan-Similkameen",
+        "Peace River",
+        "qathet",
+        "Squamish-Lillooet",
+        "Strathcona",
+        "Sunshine Coast",
+        "Thompson-Nicola");
 
     return[
-        'name' => $faker->state,
+        'name' => $district[rand(0,27)],
         'number' => $faker->buildingNumber,
 
 
