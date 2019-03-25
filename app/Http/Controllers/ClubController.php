@@ -4,6 +4,9 @@ namespace App\Http\Controllers;
 
 use App\Club;
 use Illuminate\Http\Request;
+use DB;
+use Yajra\DataTables\DataTables;
+use Carbon\Carbon;
 
 class ClubController extends Controller
 {
@@ -14,7 +17,9 @@ class ClubController extends Controller
      */
     public function index()
     {
-        //
+        $club_id = \Auth::user()->club_id;
+        $query = DB::table('clubs')->where('id', '=', $club_id);
+        return DataTables::of($query)->toJson();
     }
 
     /**
@@ -44,9 +49,12 @@ class ClubController extends Controller
      * @param  \App\Club  $club
      * @return \Illuminate\Http\Response
      */
-    public function show(Club $club)
+    public function show($id)
     {
-        //
+
+        $club_id = \Auth::user()->club_id;
+        $club = DB::table('clubs')->where('id', '=', $club_id);
+        return view('clubs.club_view', compact('club'));
     }
 
     /**

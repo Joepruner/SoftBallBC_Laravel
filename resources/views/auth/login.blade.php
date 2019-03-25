@@ -1,9 +1,40 @@
 @extends('layouts.app')
 
+@section('style')
+
+<!-- Styles -->
+<style>
+    .content {
+        text-align: center;
+    }
+
+    .title {
+        font-size: 84px;
+        color:cornflowerblue;
+    }
+
+    .flex-center {
+        align-items: center;
+        display: flex;
+        justify-content: center;
+    }
+</style>
+@endsection
+
 @section('content')
 <div class="container">
-    <div class="row">
-        <div class="col-md-8 col-md-offset-2">
+        <div class="flex-center">
+                <div class="content ">
+                    <div class="title m-b-md">
+                        <p class="zoomInUp animated">Softball BC</p>
+                    </div>
+                    <h3>
+                        The official home of the British Columbia Amateur Softball Association
+                    </h3>
+                </div>
+            </div>
+    <div class="row" style="top: 25vh !important;">
+        <div class="col-md-8 col-md-offset-2" >
             <div class="panel panel-default">
                 <div class="panel-heading">Login</div>
                 <div class="panel-body">

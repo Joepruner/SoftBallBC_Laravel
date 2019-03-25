@@ -17,7 +17,7 @@ use App\Http\Controllers\ActivePersonController;
 */
 
 Route::get('/', function () {
-    return view('welcome');
+    return view('/auth/login');
 });
 Auth::routes();
 
@@ -28,6 +28,8 @@ Route::resource('users', 'UserController');
 Route::resource('people', 'PersonController');
 
 Route::resource('teams','TeamController');
+
+Route::resource('clubs','ClubController');
 
 Route::resource('active_people','ActivePersonController');
 
@@ -40,6 +42,7 @@ Route::post('/teams/addperson', 'ActivePersonController@addPersonToTeam');
 Route::post('/teams/removeperson', 'ActivePersonController@removePersonFromTeam');
 
 Route::post('/people/editPerson', 'PersonController@edit');
+Route::post('/people/createPerson', 'PersonController@create');
 Route::post('/teams/editTeam', 'TeamController@edit');
 Route::post('/teams/createTeam', 'TeamController@create');
 Route::post('/activePeople/editActivePerson', 'ActivePersonController@edit');
