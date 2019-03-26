@@ -3,7 +3,29 @@
 <style>
     .btn-warning {
         color: #111 !important;
+
       }
+      .dataTables_processing {
+        position: absolute !important;
+        top: 50% !important;
+        left: 75% !important;
+        width: 50% !important;
+        height: 40px !important;
+        margin-left: -50% !important;
+        margin-top: -25px !important;
+        padding-top: 20px !important;
+        border: solid #286090 1px;
+        border-radius: 10%;
+        background-color: #286090 !important;
+        z-index: 2000 !important;
+    }
+
+    #processing {
+        position: relative !important;
+        top: 0px !important;
+        transform: translateY(-50%) !important;
+        font-size: 1.5em !important;
+    }
 
 </style>
 

@@ -31,6 +31,11 @@
     .dataTable td {
         padding: 2px !important;
     }
+    .adv_inactive_person_search_table,
+    .adv_active_person_search_table {
+        position:relative !important;
+        left: 15vw !important;
+    }
 
 </style>
 
@@ -50,7 +55,7 @@
     autocomplete="off">
     Create new person
 </button>
-<h3 class="adv_search_title" style="display:none;">Advanced Search</h3>
+<div style="left: 30vw !important; position:relative;"><h2 class="adv_search_title" style="display:none; ">Advanced Search</h2></div>
 
 <span class="alert alert-success" id="add_remove_alert" role="alert"
     style="display:none; position:fixed; opacity:1; z-index:30">
@@ -449,7 +454,7 @@
                 text: 'Advanced search',
                 attr: {
                     id: 'adv_search_inactive_person_btn',
-                    class: 'btn'
+                    class: 'btn btn-primary'
 
                 },
             }],
@@ -534,7 +539,7 @@
                 text: 'Advanced search',
                 attr: {
                     id: 'adv_search_active_person_btn',
-                    class: 'btn'
+                    class: 'btn btn-primary'
                 }
             }]
         });

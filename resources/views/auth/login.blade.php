@@ -1,5 +1,7 @@
 @extends('layouts.app')
 
+
+
 @section('style')
 
 <!-- Styles -->
@@ -23,18 +25,18 @@
 
 @section('content')
 <div class="container">
-        <div class="flex-center">
+        <!-- <div class="flex-center">
                 <div class="content ">
                     <div class="title m-b-md">
-                        <p class="zoomInUp animated">Softball BC</p>
+                        <p id="login_title" class="zoomInUp animated">Softball BC</p>
                     </div>
                     <h3>
                         The official home of the British Columbia Amateur Softball Association
                     </h3>
                 </div>
-            </div>
-    <div class="row" style="top: 25vh !important;">
-        <div class="col-md-8 col-md-offset-2" >
+            </div> -->
+    <div class="row" >
+        <div class="col-md-8 col-md-offset-2" style="top:10vh">
             <div class="panel panel-default">
                 <div class="panel-heading">Login</div>
                 <div class="panel-body">
